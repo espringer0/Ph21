@@ -10,12 +10,13 @@ import matplotlib.pyplot as plt
 
 
 C = 5
-A = 3
-B = 100
-L = 10
+A = 1
+B = 1
+L = 10.
 f = L / 2
 phi = 0
 t = np.arange(256)
+
 # C + Acos(ft + phi))
 sp = np.fft.fft(C + A * np.cos(f * t + phi))
 freq = np.fft.fftfreq(t.shape[-1])
@@ -26,8 +27,9 @@ plt.title('Fourier Transformed Cosine')
 plt.show()
 
 # A * exp[−B(t − L/2)^2]
-sp2 = np.fft.fft(A * np.exp(-B * (t - f) ** 2))
-plt.plot(freq, sp2.real, freq, sp2.imag)
+y = A * np.exp(-B * (t - f) ** 2)
+y_fft = (np.abs(np.fft.fft(y))) / np.sqrt(len(y))
+plt.plot(freq,y_fft)
 plt.title('Fourier Transformed Gaussian')
 plt.show()
 

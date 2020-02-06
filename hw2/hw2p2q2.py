@@ -23,17 +23,18 @@ plt.ylabel('magnitude')
 plt.xlabel('frequency (Hz)')
 plt.title('Fourier Transformed Data')
 
-dt = 0.213
+dt = 0.16
 L = 1.
 f = L / 2
-frequency = 3970.
+frequency = 3964.5
 t = np.linspace(0,L,10000)
 
 # A * exp[−B(t − L/2)^2]
-sp = np.fft.fft((np.sin(frequency * 2 * np.pi * t)) * \
+sp = np.fft.fft(1.3*(np.sin(frequency * 2 * np.pi * t)) * \
                 np.exp(-1 * (t - f) ** 2 / dt ** 2))
 
 freq = np.fft.fftfreq(t.shape[-1], L/30000.)
-#freq = np.fft.ifftshift(freq)
-plt.plot(freq + 16380, abs(sp))
+plt.plot(freq + 16384, abs(sp))
+#plt.xlim([28270,28290])
+#plt.xlim([4480,4500])
 plt.show()
